@@ -13,7 +13,7 @@
 
 namespace quizaccess_oqylyq\oqylyq;
 
-class Assignment implements ICommand {
+class assignment implements icommand {
     protected $assignment = [];
 
     public function __construct(array $data = []) {
