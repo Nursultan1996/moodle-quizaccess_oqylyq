@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
- /**
-  * Interface for defining API command objects consumed by Oqylyq gateway.
-  *
-  * @package    quizaccess_oqylyq
-  * @author     Eduard Zaukarnaev
-  * @copyright  2020 Ertumar LLP
-  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
-  */
+/**
+ * Interface for defining API command objects consumed by Oqylyq gateway.
+ *
+ * @package    quizaccess_oqylyq
+ * @author     Eduard Zaukarnaev <eduard.zaukarnaev@gmail.com>
+ * @copyright  2020 Ertumar LLP
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 namespace quizaccess_oqylyq\local;
 
