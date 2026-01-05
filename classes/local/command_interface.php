@@ -25,10 +25,46 @@
 
 namespace quizaccess_oqylyq\local;
 
-interface icommand {
-    public function getRequestUrl() : string;
-    public function getRequestMethod() : string;
-    public function getRequestData() : array;
-    public function getRequestQuery() : array;
-    public function getRequestHeaders() : array;
+/**
+ * Interface for API command objects.
+ *
+ * @package    quizaccess_oqylyq
+ * @copyright  2020 Ertumar LLP
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+interface command_interface {
+    /**
+     * Get the request URL path.
+     *
+     * @return string
+     */
+    public function get_request_url() : string;
+
+    /**
+     * Get the HTTP request method.
+     *
+     * @return string
+     */
+    public function get_request_method() : string;
+
+    /**
+     * Get the request data payload.
+     *
+     * @return array
+     */
+    public function get_request_data() : array;
+
+    /**
+     * Get the request query parameters.
+     *
+     * @return array
+     */
+    public function get_request_query() : array;
+
+    /**
+     * Get the request headers.
+     *
+     * @return array
+     */
+    public function get_request_headers() : array;
 }

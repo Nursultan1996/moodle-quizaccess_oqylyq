@@ -25,30 +25,68 @@
 
 namespace quizaccess_oqylyq\local;
 
-class student implements icommand {
+/**
+ * Student command class.
+ *
+ * @package    quizaccess_oqylyq
+ * @copyright  2020 Ertumar LLP
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class student implements command_interface {
+    /** @var array Student user data */
     protected $user = [];
 
+    /**
+     * Constructor.
+     *
+     * @param array $data Student data
+     */
     public function __construct(array $data = []) {
         $this->user = [];
     }
 
-    public function getRequestUrl () : string {
+    /**
+     * Get the request URL path.
+     *
+     * @return string
+     */
+    public function get_request_url() : string {
         return '/students';
     }
 
-    public function getRequestData () : array {
+    /**
+     * Get the request data payload.
+     *
+     * @return array
+     */
+    public function get_request_data() : array {
         return $this->user;
     }
 
-    public function getRequestQuery() : array {
+    /**
+     * Get the request query parameters.
+     *
+     * @return array
+     */
+    public function get_request_query() : array {
         return [];
     }
 
-    public function getRequestHeaders() : array {
+    /**
+     * Get the request headers.
+     *
+     * @return array
+     */
+    public function get_request_headers() : array {
         return [];
     }
 
-    public function getRequestMethod () : string {
+    /**
+     * Get the HTTP request method.
+     *
+     * @return string
+     */
+    public function get_request_method() : string {
         return 'POST';
     }
 }
