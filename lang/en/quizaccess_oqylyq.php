@@ -69,15 +69,20 @@ $string['quizsettings'] = 'Quiz settings';
 $string['restoredfrom'] = '{$a->name} (restored via cmid {$a->cmid})';
 $string['oqylyq'] = 'Proctoring Plugin';
 
-$string['oqylyq:manage_oqylyq_main_camera_record'] = 'Change Proctoring quiz setting: Frontal camera record';
-$string['oqylyq:manage_oqylyq_screen_share_record'] = 'Change Proctoring quiz setting: Screen record';
-$string['oqylyq:manage_oqylyq_second_camera_record'] = 'Change Proctoring quiz setting: Second camera record';
-$string['oqylyq:manage_oqylyq_photo_head_identity'] = 'Change Proctoring quiz setting: Head identity';
-$string['oqylyq:manage_oqylyq_id_verification'] = 'Change Proctoring quiz setting: ID Verification';
-$string['oqylyq:manage_oqylyq_display_checks'] = 'Change Proctoring quiz setting: Display checks';
-$string['oqylyq:manage_oqylyq_fullscreen_mode'] = 'Change Proctoring quiz setting: Fullscreen mode';
-$string['oqylyq:manage_oqylyq_focus_detector'] = 'Change Proctoring quiz setting: Focus Detector';
-$string['oqylyq:manage_oqylyq_extension_detector'] = 'Change Proctoring quiz setting: Extension Detector';
+// Capabilities.
+$string['oqylyq:manage_oqylyq_proctoring'] = 'Manage Oqylyq proctoring settings';
+$string['oqylyq:manage_oqylyq_application'] = 'Manage Oqylyq application type';
+$string['oqylyq:manage_oqylyq_main_camera_record'] = 'Manage Oqylyq frontal camera recording';
+$string['oqylyq:manage_oqylyq_second_camera_record'] = 'Manage Oqylyq second camera recording';
+$string['oqylyq:manage_oqylyq_screen_share_record'] = 'Manage Oqylyq screen recording';
+$string['oqylyq:manage_oqylyq_photo_head_identity'] = 'Manage Oqylyq face identity verification';
+$string['oqylyq:manage_oqylyq_id_verification'] = 'Manage Oqylyq ID verification';
+$string['oqylyq:manage_oqylyq_display_checks'] = 'Manage Oqylyq display checks';
+$string['oqylyq:manage_oqylyq_hdcp_checks'] = 'Manage Oqylyq HDCP/mirror mode checks';
+$string['oqylyq:manage_oqylyq_content_protect'] = 'Manage Oqylyq content protection';
+$string['oqylyq:manage_oqylyq_fullscreen_mode'] = 'Manage Oqylyq fullscreen mode';
+$string['oqylyq:manage_oqylyq_extension_detector'] = 'Manage Oqylyq browser extension detection';
+$string['oqylyq:manage_oqylyq_focus_detector'] = 'Manage Oqylyq focus/mouse detector';
 
 $string['oqylyq_help'] = 'Setup quiz to use the Proctoring Plugin.';
 $string['oqylyq_proctoring'] = 'Require the use of Proctoring Plugin';
