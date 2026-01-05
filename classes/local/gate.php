@@ -30,23 +30,36 @@ require_once(__DIR__ . '/../../vendor/autoload.php');
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception as GuzzleException;
 
-class gate
-{
-    public static function make(icommand $command) {
-        /* initialize client */
+/**
+ * Gateway class for API communication.
+ *
+ * @package    quizaccess_oqylyq
+ * @copyright  2020 Ertumar LLP
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class gate {
+    /**
+     * Execute an API command via Guzzle HTTP client.
+     *
+     * @param command_interface $command The command object to execute
+     * @return array Decoded JSON response
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public static function make(command_interface $command) {
+        // Initialize Guzzle HTTP client.
         $client = new GuzzleClient();
 
         $response = $client->request(
-            $command->getRequestMethod(),
-            implode([get_config('quizaccess_oqylyq', 'oqylyq_api_url'), $command->getRequestUrl()]),
+            $command->get_request_method(),
+            implode([get_config('quizaccess_oqylyq', 'oqylyq_api_url'), $command->get_request_url()]),
             [
-                'headers' => array_merge($command->getRequestHeaders(), [
+                'headers' => array_merge($command->get_request_headers(), [
                     'Accept'          => 'application/json',
                     'X-Authorization' => get_config('quizaccess_oqylyq', 'oqylyq_api_key'),
                     'Content-Type'    => 'application/json'
                 ]),
-                'query'   => $command->getRequestQuery(),
-                'json'    => $command->getRequestData()
+                'query'   => $command->get_request_query(),
+                'json'    => $command->get_request_data()
             ]
         );
 

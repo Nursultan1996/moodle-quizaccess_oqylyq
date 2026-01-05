@@ -1,42 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<thirdpartylibs>
+<?xml version="1.0"?>
+<libraries>
     <library>
-        <name>guzzlehttp/guzzle</name>
-        <description>Guzzle HTTP client</description>
+        <location>vendor/guzzlehttp/guzzle</location>
+        <name>Guzzle HTTP Client</name>
+        <version>7.8.1</version>
         <license>MIT</license>
-        <version>7.x</version>
-        <source>https://github.com/guzzle/guzzle</source>
+        <licenseversion></licenseversion>
     </library>
-
     <library>
-        <name>guzzlehttp/promises</name>
-        <description>Guzzle promises library</description>
+        <location>vendor/guzzlehttp/promises</location>
+        <name>Guzzle Promises</name>
+        <version>2.0.2</version>
         <license>MIT</license>
-        <version>1.x</version>
-        <source>https://github.com/guzzle/promises</source>
+        <licenseversion></licenseversion>
     </library>
-
     <library>
-        <name>guzzlehttp/psr7</name>
-        <description>PSR-7 HTTP message implementation</description>
+        <location>vendor/guzzlehttp/psr7</location>
+        <name>PSR-7 Message Implementation</name>
+        <version>2.6.2</version>
         <license>MIT</license>
-        <version>2.x</version>
-        <source>https://github.com/guzzle/psr7</source>
+        <licenseversion></licenseversion>
     </library>
-
     <library>
-        <name>psr/http-message</name>
-        <description>PSR HTTP message interfaces</description>
+        <location>vendor/psr/http-client</location>
+        <name>PSR-18 HTTP Client</name>
+        <version>1.0.3</version>
         <license>MIT</license>
-        <version>1.x</version>
-        <source>https://github.com/php-fig/http-message</source>
+        <licenseversion></licenseversion>
     </library>
-
     <library>
-        <name>ralouphie/getallheaders</name>
-        <description>Helper to get all HTTP headers</description>
+        <location>vendor/psr/http-factory</location>
+        <name>PSR-17 HTTP Factory</name>
+        <version>1.0.2</version>
         <license>MIT</license>
-        <version>3.x</version>
-        <source>https://github.com/ralouphie/getallheaders</source>
+        <licenseversion></licenseversion>
     </library>
-</thirdpartylibs>
+    <library>
+        <location>vendor/psr/http-message</location>
+        <name>PSR-7 HTTP Message Interface</name>
+        <version>2.0</version>
+        <license>MIT</license>
+        <licenseversion></licenseversion>
+    </library>
+    <library>
+        <location>vendor/ralouphie/getallheaders</location>
+        <name>Get All Headers Polyfill</name>
+        <version>3.0.3</version>
+        <license>MIT</license>
+        <licenseversion></licenseversion>
+    </library>
+</libraries>
