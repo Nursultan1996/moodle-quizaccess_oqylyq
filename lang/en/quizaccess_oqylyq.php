@@ -43,11 +43,28 @@ $string['invalid_hash_key'] = "Invalid Proctoring hash key";
 $string['missingrequiredsettings'] = 'Config settings are missing some required values.';
 $string['name'] = 'Oqylyq Proctoring';
 $string['pluginname'] = 'Proctoring Access Rules';
-$string['privacy:metadata:quizaccess_oql_quizsettings'] = 'Proctoring settings for a quiz. This includes the ID of the last user to create or modify the settings.';
-$string['privacy:metadata:quizaccess_oql_quizsettings:quizid'] = 'ID of the quiz the settings exist for.';
-$string['privacy:metadata:quizaccess_oql_quizsettings:timecreated'] = 'Unix time that the settings were created.';
-$string['privacy:metadata:quizaccess_oql_quizsettings:timemodified'] = 'Unix time that the settings were last modified.';
-$string['privacy:metadata:quizaccess_oql_quizsettings:usermodified'] = 'ID of user who last created or modified the settings.';
+
+// Privacy API strings.
+$string['privacy:metadata:quizaccess_oql_quizsettings'] = 'Information about Oqylyq proctoring settings for a quiz. This includes the ID of the user who created or last modified the settings.';
+$string['privacy:metadata:quizaccess_oql_quizsettings:usermodified'] = 'The ID of the user who last created or modified the proctoring settings.';
+$string['privacy:metadata:quizaccess_oql_quizsettings:timecreated'] = 'The time when the proctoring settings were created.';
+$string['privacy:metadata:quizaccess_oql_quizsettings:timemodified'] = 'The time when the proctoring settings were last modified.';
+
+$string['privacy:metadata:quizaccess_oql_quizurls'] = 'Information about generated Oqylyq proctoring session URLs for users attempting quizzes.';
+$string['privacy:metadata:quizaccess_oql_quizurls:userid'] = 'The ID of the user for whom the proctoring session URL was generated.';
+$string['privacy:metadata:quizaccess_oql_quizurls:usermodified'] = 'The ID of the user who last modified this record.';
+$string['privacy:metadata:quizaccess_oql_quizurls:url'] = 'The generated proctoring session URL for accessing the quiz.';
+$string['privacy:metadata:quizaccess_oql_quizurls:timecreated'] = 'The time when the proctoring URL was generated.';
+$string['privacy:metadata:quizaccess_oql_quizurls:timemodified'] = 'The time when the record was last modified.';
+
+$string['privacy:metadata:oqylyq_external'] = 'The Oqylyq plugin sends user information to the external Oqylyq/TrustExam proctoring service in order to create proctored exam sessions.';
+$string['privacy:metadata:oqylyq_external:userid'] = 'The user ID is sent to Oqylyq to identify the student in the proctoring system.';
+$string['privacy:metadata:oqylyq_external:firstname'] = 'The user\'s first name is sent to Oqylyq to identify the student.';
+$string['privacy:metadata:oqylyq_external:lastname'] = 'The user\'s last name is sent to Oqylyq to identify the student.';
+$string['privacy:metadata:oqylyq_external:email'] = 'The user\'s email address is sent to Oqylyq for user identification and communication.';
+$string['privacy:metadata:oqylyq_external:password'] = 'A generated password hash is sent to Oqylyq to secure the proctoring session.';
+$string['privacy:metadata:oqylyq_external:quizname'] = 'The quiz name is sent to Oqylyq to label the proctoring session.';
+
 $string['quizsettings'] = 'Quiz settings';
 $string['restoredfrom'] = '{$a->name} (restored via cmid {$a->cmid})';
 $string['oqylyq'] = 'Proctoring Plugin';
