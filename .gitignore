@@ -1,1 +1,11 @@
+# IDE
 .idea
+.vscode
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Composer (not needed for Moodle plugins)
+/vendor/
+composer.lock
