@@ -70,19 +70,19 @@ $string['restoredfrom'] = '{$a->name} (restored via cmid {$a->cmid})';
 $string['oqylyq'] = 'Proctoring Plugin';
 
 // Capabilities.
-$string['oqylyq:manage_oqylyq_proctoring'] = 'Manage Oqylyq proctoring settings';
-$string['oqylyq:manage_oqylyq_application'] = 'Manage Oqylyq application type';
-$string['oqylyq:manage_oqylyq_main_camera_record'] = 'Manage Oqylyq frontal camera recording';
-$string['oqylyq:manage_oqylyq_second_camera_record'] = 'Manage Oqylyq second camera recording';
-$string['oqylyq:manage_oqylyq_screen_share_record'] = 'Manage Oqylyq screen recording';
-$string['oqylyq:manage_oqylyq_photo_head_identity'] = 'Manage Oqylyq face identity verification';
-$string['oqylyq:manage_oqylyq_id_verification'] = 'Manage Oqylyq ID verification';
-$string['oqylyq:manage_oqylyq_display_checks'] = 'Manage Oqylyq display checks';
-$string['oqylyq:manage_oqylyq_hdcp_checks'] = 'Manage Oqylyq HDCP/mirror mode checks';
-$string['oqylyq:manage_oqylyq_content_protect'] = 'Manage Oqylyq content protection';
-$string['oqylyq:manage_oqylyq_fullscreen_mode'] = 'Manage Oqylyq fullscreen mode';
-$string['oqylyq:manage_oqylyq_extension_detector'] = 'Manage Oqylyq browser extension detection';
-$string['oqylyq:manage_oqylyq_focus_detector'] = 'Manage Oqylyq focus/mouse detector';
+$string['quizaccess/oqylyq:manage_oqylyq_proctoring'] = 'Manage Oqylyq proctoring settings';
+$string['quizaccess/oqylyq:manage_oqylyq_application'] = 'Manage Oqylyq application type';
+$string['quizaccess/oqylyq:manage_oqylyq_main_camera_record'] = 'Manage Oqylyq frontal camera recording';
+$string['quizaccess/oqylyq:manage_oqylyq_second_camera_record'] = 'Manage Oqylyq second camera recording';
+$string['quizaccess/oqylyq:manage_oqylyq_screen_share_record'] = 'Manage Oqylyq screen recording';
+$string['quizaccess/oqylyq:manage_oqylyq_photo_head_identity'] = 'Manage Oqylyq face identity verification';
+$string['quizaccess/oqylyq:manage_oqylyq_id_verification'] = 'Manage Oqylyq ID verification';
+$string['quizaccess/oqylyq:manage_oqylyq_display_checks'] = 'Manage Oqylyq display checks';
+$string['quizaccess/oqylyq:manage_oqylyq_hdcp_checks'] = 'Manage Oqylyq HDCP/mirror mode checks';
+$string['quizaccess/oqylyq:manage_oqylyq_content_protect'] = 'Manage Oqylyq content protection';
+$string['quizaccess/oqylyq:manage_oqylyq_fullscreen_mode'] = 'Manage Oqylyq fullscreen mode';
+$string['quizaccess/oqylyq:manage_oqylyq_extension_detector'] = 'Manage Oqylyq browser extension detection';
+$string['quizaccess/oqylyq:manage_oqylyq_focus_detector'] = 'Manage Oqylyq focus/mouse detector';
 
 $string['oqylyq_help'] = 'Setup quiz to use the Proctoring Plugin.';
 $string['oqylyq_proctoring'] = 'Require the use of Proctoring Plugin';
