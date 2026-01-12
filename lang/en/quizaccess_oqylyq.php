@@ -121,4 +121,6 @@ $string['launch_button'] = 'Launch';
 $string['proctoring_required'] = "This quiz has been configured so that students may only attempt it using the Proctoring.";$string['setting:supportedversions'] = 'Please note that the following minimum versions of the Safe Exam Browser client are required to use the config key feature: macOS - 2.1.5pre2, Windows - 3.0, iOS - 2.1.14.';
 $string['settingsfrozen'] = 'Due to there being at least one quiz attempt, the Proctoring settings can no longer be updated.';
 $string['unknown_reason'] = "Unknown reason";
+$string['unsupportedmethod'] = 'Unsupported HTTP method: {$a}';
+$string['apierror'] = 'API request failed with HTTP code: {$a}';
 $string['used'] = 'In use';

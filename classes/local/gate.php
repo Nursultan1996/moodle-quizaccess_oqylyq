@@ -25,10 +25,10 @@
 
 namespace quizaccess_oqylyq\local;
 
-require_once(__DIR__ . '/../../vendor/autoload.php');
+use curl;
+use moodle_exception;
 
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception as GuzzleException;
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Gateway class for API communication.
@@ -39,30 +39,46 @@ use GuzzleHttp\Exception as GuzzleException;
  */
 class gate {
     /**
-     * Execute an API command via Guzzle HTTP client.
+     * Execute an API command via Moodle's curl class.
      *
      * @param command_interface $command The command object to execute
      * @return array Decoded JSON response
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws moodle_exception
      */
     public static function make(command_interface $command) {
-        // Initialize Guzzle HTTP client.
-        $client = new GuzzleClient();
+        $curl = new curl();
 
-        $response = $client->request(
-            $command->get_request_method(),
-            implode([get_config('quizaccess_oqylyq', 'oqylyq_api_url'), $command->get_request_url()]),
-            [
-                'headers' => array_merge($command->get_request_headers(), [
-                    'Accept'          => 'application/json',
-                    'X-Authorization' => get_config('quizaccess_oqylyq', 'oqylyq_api_key'),
-                    'Content-Type'    => 'application/json'
-                ]),
-                'query'   => $command->get_request_query(),
-                'json'    => $command->get_request_data()
-            ]
-        );
+        // Build full URL.
+        $baseurl = get_config('quizaccess_oqylyq', 'oqylyq_api_url');
+        $url = $baseurl . $command->get_request_url();
 
-        return json_decode($response->getBody()->getContents(), true);
+        // Prepare headers.
+        $headers = array_merge($command->get_request_headers(), [
+            'Accept: application/json',
+            'X-Authorization: ' . get_config('quizaccess_oqylyq', 'oqylyq_api_key'),
+            'Content-Type: application/json'
+        ]);
+
+        $curl->setHeader($headers);
+
+        // Execute request based on method.
+        $method = $command->get_request_method();
+        $data = $command->get_request_data();
+
+        if ($method === 'POST') {
+            $response = $curl->post($url, json_encode($data));
+        } else if ($method === 'GET') {
+            $response = $curl->get($url, $command->get_request_query());
+        } else {
+            throw new moodle_exception('unsupportedmethod', 'quizaccess_oqylyq', '', $method);
+        }
+
+        // Check for errors.
+        $info = $curl->get_info();
+        if ($info['http_code'] >= 400) {
+            throw new moodle_exception('apierror', 'quizaccess_oqylyq', '', $info['http_code']);
+        }
+
+        return json_decode($response, true);
     }
 }
