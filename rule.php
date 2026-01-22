@@ -30,13 +30,20 @@ use quizaccess_oqylyq\event\access_prevented;
 
 defined('MOODLE_INTERNAL') || die();
 
+// For Moodle 5.0+ compatibility.
+if (class_exists('mod_quiz\local\access_rule_base')) {
+    class_alias('mod_quiz\local\access_rule_base', 'quiz_access_rule_base_alias');
+} else {
+    class_alias('quiz_access_rule_base', 'quiz_access_rule_base_alias');
+}
+
 /**
  * Implementation of the quizaccess_oqylyq plugin.
  *
  * @copyright  2020 Ertumar LLP
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class quizaccess_oqylyq extends quiz_access_rule_base {
+class quizaccess_oqylyq extends quiz_access_rule_base_alias {
 
     /** @var access_manager $accessmanager Instance to manage the access to the quiz for this plugin. */
     private $accessmanager;
