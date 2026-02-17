@@ -38,7 +38,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class access_manager {
     /** Header sent by Oqylyq Application containing the url key hash. */
-    private const EXAM_KEY_QUERY = 'hash';
+    const EXAM_KEY_QUERY = 'hash';
 
     /** @var quiz $quiz A quiz object containing all information pertaining to current quiz. */
     private $quiz;

@@ -257,7 +257,7 @@ class settings_provider {
         foreach (self::get_quiz_hideifs() as $elname => $rules) {
             if ($mform->elementExists($elname)) {
                 foreach ($rules as $hideif) {
-                    $mform->hideIf(
+                    $mform->disabledIf(
                         $hideif->get_element(),
                         $hideif->get_dependantname(),
                         $hideif->get_condition(),

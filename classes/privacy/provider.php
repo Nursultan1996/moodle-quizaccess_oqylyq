@@ -8,6 +8,11 @@ namespace quizaccess_oqylyq\privacy;
 
 defined('MOODLE_INTERNAL') || die();
 
+// Privacy API requires Moodle 3.3+. Guard for Moodle 3.1 compatibility.
+if (!interface_exists('\core_privacy\local\metadata\provider')) {
+    return;
+}
+
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\writer;
 use core_privacy\local\request\approved_contextlist;

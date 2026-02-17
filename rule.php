@@ -24,6 +24,7 @@
  */
 
 use quizaccess_oqylyq\local\access_manager;
+use quizaccess_oqylyq\local\link_generator;
 use quizaccess_oqylyq\local\quiz_settings;
 use quizaccess_oqylyq\local\settings_provider;
 use quizaccess_oqylyq\event\access_prevented;
@@ -294,7 +295,7 @@ class quizaccess_oqylyq extends quiz_access_rule_base_alias {
     private function get_launch_oqylyq_button() : string {
         global $OUTPUT;
 
-        $link = \quizaccess_oqylyq\link_generator::get_link($this->quiz, $this->accessmanager->get_quizsettings());
+        $link = link_generator::get_link($this->quiz, $this->accessmanager->get_quizsettings());
 
         return $OUTPUT->single_button($link, get_string('launch_button', 'quizaccess_oqylyq'), 'get');
     }
