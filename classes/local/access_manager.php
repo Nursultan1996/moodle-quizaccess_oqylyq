@@ -26,7 +26,7 @@
 namespace quizaccess_oqylyq\local;
 
 use context_module;
-use quiz;
+use mod_quiz\quiz_settings as mod_quiz_settings;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -40,7 +40,7 @@ class access_manager {
     /** Header sent by Oqylyq Application containing the url key hash. */
     private const EXAM_KEY_QUERY = 'hash';
 
-    /** @var quiz $quiz A quiz object containing all information pertaining to current quiz. */
+    /** @var mod_quiz_settings $quiz A quiz object containing all information pertaining to current quiz. */
     private $quiz;
 
     /** @var quiz_settings $quizsettings A quiz settings persistent object containing plugin settings */
@@ -52,9 +52,9 @@ class access_manager {
     /**
      * The access_manager constructor.
      *
-     * @param quiz $quiz The details of the quiz.
+     * @param mod_quiz_settings $quiz The details of the quiz.
      */
-    public function __construct(quiz $quiz) {
+    public function __construct(mod_quiz_settings $quiz) {
         $this->quiz = $quiz;
         $this->context = context_module::instance($quiz->get_cmid());
         $this->quizsettings = quiz_settings::get_record(['quizid' => $quiz->get_quizid()]);
@@ -112,16 +112,16 @@ class access_manager {
     /**
      * Getter for the quiz object.
      *
-     * @return quiz
+     * @return mod_quiz_settings
      */
-    public function get_quiz() : quiz {
+    public function get_quiz() : mod_quiz_settings {
         return $this->quiz;
     }
 
     /**
-     * Getter for the quiz object.
+     * Getter for the quiz settings object.
      *
-     * @return quiz
+     * @return quiz_settings
      */
     public function get_quizsettings() : quiz_settings {
         return $this->quizsettings;
