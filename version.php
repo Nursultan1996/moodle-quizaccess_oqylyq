@@ -25,8 +25,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2027051306;
-$plugin->release = 2027051306;
+$plugin->version = 2027051307;
+$plugin->release = 2027051307;
 $plugin->requires = 2018120300;
 $plugin->component = 'quizaccess_oqylyq';
 $plugin->maturity = MATURITY_STABLE;
+$plugin->dependencies = [
+    'auth_oqylyq' => ANY_VERSION,
+];

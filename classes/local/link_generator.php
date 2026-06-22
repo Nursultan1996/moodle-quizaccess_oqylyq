@@ -26,8 +26,9 @@ class link_generator {
     /**
      * Get a link to force the download of the file over https.
      *
-     * @param string $cmid Course module ID.
-     * @return quiz_settings $settings.
+     * @param object $quiz Quiz module record.
+     * @param quiz_settings $settings Quiz access settings.
+     * @return string Generated or cached launch link.
      */
     public static function get_link($quiz, quiz_settings $settings) : string {
         global $USER;
@@ -48,7 +49,7 @@ class link_generator {
         $exiturl  = new moodle_url(sprintf('/mod/quiz/view.php?id=%d&forceview=1&', $quiz->cmid));
 
         /* create student */
-        $session = new oqylyq\Session([
+        $session = new session([
             'student' => [
                 'external_id' => $USER->id,
 
@@ -102,7 +103,7 @@ class link_generator {
         ]);
 
         /* call api request */
-      	$response = oqylyq\Gate::make($session);
+        $response = gate::make($session);
         /* remember link for 1 hour */
         quiz_urls::createLink($USER, $quiz, $response['session_url'], 3600);
 

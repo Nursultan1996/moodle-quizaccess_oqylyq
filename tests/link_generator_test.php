@@ -25,8 +25,8 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * Tests for the link_generator class.
  *
- * Note: get_link() uses oqylyq\Session and oqylyq\Gate which resolve to nonexistent
- * namespaces. Only the cached-URL path and standalone methods can be tested.
+ * Note: get_link() calls the external Oqylyq API when there is no cached URL.
+ * Only the cached-URL path and standalone methods can be tested here.
  *
  * @package    quizaccess_oqylyq
  * @copyright  2020 Ertumar LLP
