@@ -35,7 +35,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class quiz_urls extends persistent {
     /** Table name for the persistent. */
-    const TABLE = 'quizaccess_oql_quizurls';
+    const TABLE = 'quizaccess_oqylyq_urls';
 
     /** @var string $config The oqylyq config represented as a string. */
     private $config;

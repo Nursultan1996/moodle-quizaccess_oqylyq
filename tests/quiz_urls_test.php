@@ -39,7 +39,7 @@ class quiz_urls_test extends \advanced_testcase {
      * Test that the TABLE constant has the expected value.
      */
     public function test_table_constant(): void {
-        $this->assertSame('quizaccess_oql_quizurls', quiz_urls::TABLE);
+        $this->assertSame('quizaccess_oqylyq_urls', quiz_urls::TABLE);
     }
 
     /**
@@ -83,12 +83,12 @@ class quiz_urls_test extends \advanced_testcase {
         $quiz = (object) ['id' => 100, 'cmid' => 200];
 
         quiz_urls::createLink($user, $quiz, 'https://example.com/session/old', 3600);
-        $this->assertEquals(1, $DB->count_records('quizaccess_oql_quizurls', ['userid' => $user->id]));
+        $this->assertEquals(1, $DB->count_records('quizaccess_oqylyq_urls', ['userid' => $user->id]));
 
         quiz_urls::createLink($user, $quiz, 'https://example.com/session/new', 3600);
-        $this->assertEquals(1, $DB->count_records('quizaccess_oql_quizurls', ['userid' => $user->id]));
+        $this->assertEquals(1, $DB->count_records('quizaccess_oqylyq_urls', ['userid' => $user->id]));
 
-        $records = $DB->get_records('quizaccess_oql_quizurls', ['userid' => $user->id]);
+        $records = $DB->get_records('quizaccess_oqylyq_urls', ['userid' => $user->id]);
         $record = reset($records);
         $this->assertSame('https://example.com/session/new', $record->url);
     }
@@ -131,7 +131,7 @@ class quiz_urls_test extends \advanced_testcase {
         $link = quiz_urls::createLink($user, $quiz, 'https://example.com/session/expired', 1);
 
         // Force timecreated to be far in the past so the link is expired.
-        $DB->set_field('quizaccess_oql_quizurls', 'timecreated', time() - 3600, ['id' => $link->get('id')]);
+        $DB->set_field('quizaccess_oqylyq_urls', 'timecreated', time() - 3600, ['id' => $link->get('id')]);
 
         $result = quiz_urls::checkExists($user, $quiz);
         $this->assertNull($result);
@@ -160,7 +160,7 @@ class quiz_urls_test extends \advanced_testcase {
         $link = quiz_urls::createLink($user, $quiz, 'https://example.com/session/forever', 0);
 
         // Set timecreated far in the past - should still be valid since lifetime=0.
-        $DB->set_field('quizaccess_oql_quizurls', 'timecreated', 1000, ['id' => $link->get('id')]);
+        $DB->set_field('quizaccess_oqylyq_urls', 'timecreated', 1000, ['id' => $link->get('id')]);
 
         $result = quiz_urls::checkExists($user, $quiz);
         $this->assertNotNull($result);

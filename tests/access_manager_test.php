@@ -41,18 +41,23 @@ class access_manager_test extends \advanced_testcase {
     /** @var array Saved $_REQUEST superglobal. */
     private $originalrequest;
 
+    /** @var array Saved $_GET superglobal. */
+    private $originalget;
+
     protected function setUp(): void {
         parent::setUp();
         $this->resetAfterTest(true);
         $this->originalserver = $_SERVER;
         $this->originalcookie = $_COOKIE;
         $this->originalrequest = $_REQUEST;
+        $this->originalget = $_GET;
     }
 
     protected function tearDown(): void {
         $_SERVER = $this->originalserver;
         $_COOKIE = $this->originalcookie;
         $_REQUEST = $this->originalrequest;
+        $_GET = $this->originalget;
         parent::tearDown();
     }
 
@@ -181,33 +186,59 @@ class access_manager_test extends \advanced_testcase {
     }
 
     /**
-     * Test validate_hash_keys returns true when a cookie is set.
-     *
-     * Documents that check_key() always returns true (bypass on line 147).
+     * Test validate_hash_keys rejects an invalid hash stored in the cookie.
      */
-    public function test_validate_hash_with_cookie(): void {
+    public function test_validate_hash_with_invalid_cookie(): void {
         $quizobj = $this->create_quiz_object();
         $manager = new access_manager($quizobj);
 
         unset($_SERVER['DOCUMENT_URI']);
         $_COOKIE['proctoring_oqylyq_hash'] = 'somehash';
-        unset($_REQUEST['hash']);
+        unset($_GET['hash'], $_REQUEST['hash']);
+
+        $this->assertFalse($manager->validate_hash_keys());
+    }
+
+    /**
+     * Test validate_hash_keys accepts a valid hash stored in the cookie.
+     */
+    public function test_validate_hash_with_valid_cookie(): void {
+        global $CFG;
+        $quizobj = $this->create_quiz_object();
+        $manager = new access_manager($quizobj);
+
+        unset($_SERVER['DOCUMENT_URI']);
+        $_COOKIE['proctoring_oqylyq_hash'] = hash('sha256', $CFG->wwwroot);
+        unset($_GET['hash'], $_REQUEST['hash']);
 
         $this->assertTrue($manager->validate_hash_keys());
     }
 
     /**
-     * Test validate_hash_keys returns true when hash is in the request.
-     *
-     * Documents that check_key() always returns true (bypass on line 147).
+     * Test validate_hash_keys rejects an invalid hash supplied in the request.
      */
-    public function test_validate_hash_with_get_param(): void {
+    public function test_validate_hash_with_invalid_get_param(): void {
         $quizobj = $this->create_quiz_object();
         $manager = new access_manager($quizobj);
 
         unset($_SERVER['DOCUMENT_URI']);
         unset($_COOKIE['proctoring_oqylyq_hash']);
-        $_REQUEST['hash'] = 'testhash';
+        $_GET['hash'] = 'testhash';
+
+        $this->assertFalse($manager->validate_hash_keys());
+    }
+
+    /**
+     * Test validate_hash_keys accepts a valid hash supplied in the request.
+     */
+    public function test_validate_hash_with_valid_get_param(): void {
+        global $CFG;
+        $quizobj = $this->create_quiz_object();
+        $manager = new access_manager($quizobj);
+
+        unset($_SERVER['DOCUMENT_URI']);
+        unset($_COOKIE['proctoring_oqylyq_hash']);
+        $_GET['hash'] = hash('sha256', $CFG->wwwroot);
 
         $this->assertTrue($manager->validate_hash_keys());
     }
@@ -221,7 +252,7 @@ class access_manager_test extends \advanced_testcase {
 
         unset($_SERVER['DOCUMENT_URI']);
         unset($_COOKIE['proctoring_oqylyq_hash']);
-        unset($_REQUEST['hash']);
+        unset($_GET['hash'], $_REQUEST['hash']);
 
         $this->assertFalse($manager->validate_hash_keys());
     }
@@ -237,18 +268,18 @@ class access_manager_test extends \advanced_testcase {
         $quizobj = $this->create_quiz_object();
         $manager = new access_manager($quizobj);
 
-        unset($_REQUEST['hash']);
+        unset($_GET['hash'], $_REQUEST['hash']);
         $this->assertNull($manager->get_received_hash_key());
     }
 
     /**
-     * Test get_received_hash_key trims whitespace.
+     * Test get_received_hash_key cleans the supplied value as PARAM_ALPHANUMEXT.
      */
-    public function test_get_received_hash_key_trimmed(): void {
+    public function test_get_received_hash_key_cleaned(): void {
         $quizobj = $this->create_quiz_object();
         $manager = new access_manager($quizobj);
 
-        $_REQUEST['hash'] = '  abc  ';
+        $_GET['hash'] = '  abc  ';
         $this->assertSame('abc', $manager->get_received_hash_key());
     }
 

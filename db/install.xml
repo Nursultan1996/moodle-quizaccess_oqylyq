@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="../../../../../lib/xmldb/xmldb.xsd">
     <TABLES>
-        <TABLE NAME="quizaccess_oql_quizsettings" COMMENT="Stores the quiz level Oqylyq configuration.">
+        <TABLE NAME="quizaccess_oqylyq_settings" COMMENT="Stores the quiz level Oqylyq configuration.">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="quizid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key to quiz id."/>
@@ -34,7 +34,7 @@
             </KEYS>
         </TABLE>
 
-        <TABLE NAME="quizaccess_oql_quizurls" COMMENT="Stores the quiz level Oqylyq configuration.">
+        <TABLE NAME="quizaccess_oqylyq_urls" COMMENT="Stores the quiz level Oqylyq configuration.">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key to user id."/>

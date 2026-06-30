@@ -33,7 +33,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class quiz_settings extends persistent {
     /** Table name for the persistent. */
-    const TABLE = 'quizaccess_oql_quizsettings';
+    const TABLE = 'quizaccess_oqylyq_settings';
 
     /** @var string $config The SEB config represented as a string. */
     private $config;

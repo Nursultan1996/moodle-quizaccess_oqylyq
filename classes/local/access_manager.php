@@ -79,20 +79,24 @@ class access_manager {
             return true;
         }
 
-        /* if exists cookie */
+        $receivedhash = $this->get_received_hash_key();
+
+        /* a freshly supplied hash is validated and only remembered when it is valid */
+        if (!is_null($receivedhash)) {
+            if ($this->check_key($receivedhash)) {
+                setcookie('proctoring_oqylyq_hash', $receivedhash, time() + 3600);
+                return true;
+            }
+
+            return false;
+        }
+
+        /* fall back to a previously validated hash stored in the cookie */
         if (isset($_COOKIE['proctoring_oqylyq_hash'])) {
             return $this->check_key($_COOKIE['proctoring_oqylyq_hash']);
         }
 
-        /* if hash not passed */
-        if (is_null($this->get_received_hash_key())) {
-            return false;
-        }
-
-        /* remember hash */
-        setcookie('proctoring_oqylyq_hash', $this->get_received_hash_key(), time() + 3600);
-
-        return $this->check_key($this->get_received_hash_key());
+        return false;
     }
 
     /**
@@ -136,15 +140,18 @@ class access_manager {
     }
 
     /**
-     * Check the hash from the request header against a single permitted key.
+     * Check the supplied hash against the expected value for the current page.
      *
-     * @param string $key an allowed key.
-     * @param string $hash query param
+     * @param string $hash the hash supplied through the request or cookie.
      * @return bool true if the hash matches.
      */
     private function check_key($hash) : bool {
-        return true;
-        return hash('sha256', $this->get_this_page_url()) === $hash;
+        if (empty($hash)) {
+            return false;
+        }
+
+        // Constant-time comparison of the supplied hash against the expected value.
+        return hash_equals(hash('sha256', $this->get_this_page_url()), (string) $hash);
     }
 
     /**
@@ -153,8 +160,10 @@ class access_manager {
      * @return string|null
      */
     public function get_received_hash_key() {
-        if (isset($_REQUEST[self::EXAM_KEY_QUERY])) {
-            return trim($_REQUEST[self::EXAM_KEY_QUERY]);
+        $hash = optional_param(self::EXAM_KEY_QUERY, '', PARAM_ALPHANUMEXT);
+
+        if ($hash !== '') {
+            return $hash;
         }
 
         return null;
