@@ -189,14 +189,14 @@ class rule_test extends \advanced_testcase {
     }
 
     /**
-     * Test get_settings_sql join is a LEFT JOIN on quizaccess_oql_quizsettings.
+     * Test get_settings_sql join is a LEFT JOIN on quizaccess_oqylyq_settings.
      */
     public function test_get_settings_sql_join(): void {
         $result = \quizaccess_oqylyq::get_settings_sql(1);
         $join = $result[1];
 
         $this->assertStringContainsString('LEFT JOIN', $join);
-        $this->assertStringContainsString('quizaccess_oql_quizsettings', $join);
+        $this->assertStringContainsString('quizaccess_oqylyq_settings', $join);
     }
 
     // -------------------------------------------------------

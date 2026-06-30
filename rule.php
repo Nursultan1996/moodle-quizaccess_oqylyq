@@ -224,7 +224,7 @@ class quizaccess_oqylyq extends quiz_access_rule_base_alias {
             . 'oqylyq.fullscreen_mode AS oqylyq_fullscreen_mode, '
             . 'oqylyq.extension_detector AS oqylyq_extension_detector, '
             . 'oqylyq.focus_detector AS oqylyq_focus_detector '
-            , 'LEFT JOIN {quizaccess_oql_quizsettings} oqylyq ON oqylyq.quizid = quiz.id '
+            , 'LEFT JOIN {quizaccess_oqylyq_settings} oqylyq ON oqylyq.quizid = quiz.id '
             , []
         ];
     }

@@ -39,7 +39,7 @@ class quiz_settings_test extends \advanced_testcase {
      * Test that the TABLE constant has the expected value.
      */
     public function test_table_constant(): void {
-        $this->assertSame('quizaccess_oql_quizsettings', quiz_settings::TABLE);
+        $this->assertSame('quizaccess_oqylyq_settings', quiz_settings::TABLE);
     }
 
     /**

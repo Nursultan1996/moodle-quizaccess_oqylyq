@@ -179,12 +179,12 @@ class privacy_provider_test extends \core_privacy\tests\provider_testcase {
         $contextlist = new approved_contextlist($user, 'quizaccess_oqylyq', [$context->id]);
         provider::delete_data_for_user($contextlist);
 
-        $this->assertEquals(0, $DB->count_records('quizaccess_oql_quizsettings', [
+        $this->assertEquals(0, $DB->count_records('quizaccess_oqylyq_settings', [
             'cmid' => $quiz->cmid,
             'usermodified' => $user->id,
         ]));
 
-        $this->assertEquals(0, $DB->count_records('quizaccess_oql_quizurls', [
+        $this->assertEquals(0, $DB->count_records('quizaccess_oqylyq_urls', [
             'cmid' => $quiz->cmid,
             'userid' => $user->id,
         ]));
@@ -204,8 +204,8 @@ class privacy_provider_test extends \core_privacy\tests\provider_testcase {
 
         provider::delete_data_for_all_users_in_context($context);
 
-        $this->assertEquals(0, $DB->count_records('quizaccess_oql_quizsettings', ['cmid' => $quiz->cmid]));
-        $this->assertEquals(0, $DB->count_records('quizaccess_oql_quizurls', ['cmid' => $quiz->cmid]));
+        $this->assertEquals(0, $DB->count_records('quizaccess_oqylyq_settings', ['cmid' => $quiz->cmid]));
+        $this->assertEquals(0, $DB->count_records('quizaccess_oqylyq_urls', ['cmid' => $quiz->cmid]));
     }
 
     /**
@@ -217,12 +217,12 @@ class privacy_provider_test extends \core_privacy\tests\provider_testcase {
         list(, $quiz, , , , ) = $this->create_test_data();
         $systemcontext = \context_system::instance();
 
-        $settingscount = $DB->count_records('quizaccess_oql_quizsettings', ['cmid' => $quiz->cmid]);
+        $settingscount = $DB->count_records('quizaccess_oqylyq_settings', ['cmid' => $quiz->cmid]);
 
         provider::delete_data_for_all_users_in_context($systemcontext);
 
         // Data should still be there.
-        $this->assertEquals($settingscount, $DB->count_records('quizaccess_oql_quizsettings', ['cmid' => $quiz->cmid]));
+        $this->assertEquals($settingscount, $DB->count_records('quizaccess_oqylyq_settings', ['cmid' => $quiz->cmid]));
     }
 
     // -------------------------------------------------------
@@ -257,12 +257,12 @@ class privacy_provider_test extends \core_privacy\tests\provider_testcase {
         $userlist = new approved_userlist($context, 'quizaccess_oqylyq', [$user->id]);
         provider::delete_data_for_users($userlist);
 
-        $this->assertEquals(0, $DB->count_records('quizaccess_oql_quizsettings', [
+        $this->assertEquals(0, $DB->count_records('quizaccess_oqylyq_settings', [
             'cmid' => $quiz->cmid,
             'usermodified' => $user->id,
         ]));
 
-        $this->assertEquals(0, $DB->count_records('quizaccess_oql_quizurls', [
+        $this->assertEquals(0, $DB->count_records('quizaccess_oqylyq_urls', [
             'cmid' => $quiz->cmid,
             'userid' => $user->id,
         ]));

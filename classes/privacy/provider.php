@@ -1,8 +1,27 @@
 <?php
-// This file is part of Moodle - http://moodle.org/.
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License...
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Privacy provider for the quizaccess_oqylyq plugin.
+ *
+ * @package    quizaccess_oqylyq
+ * @author     Eduard Zaukarnaev <eduard.zaukarnaev@gmail.com>
+ * @copyright  2020 Ertumar LLP
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 namespace quizaccess_oqylyq\privacy;
 
@@ -18,7 +37,9 @@ use core_privacy\local\request\userlist;
 /**
  * Privacy provider for quizaccess_oqylyq plugin.
  *
- * @package   quizaccess_oqylyq
+ * @package    quizaccess_oqylyq
+ * @copyright  2020 Ertumar LLP
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
     \core_privacy\local\metadata\provider,
@@ -33,9 +54,9 @@ class provider implements
      */
     public static function get_metadata(collection $collection) : collection {
 
-        // quizaccess_oql_quizsettings - stores who modified quiz settings
+        // quizaccess_oqylyq_settings - stores who modified quiz settings
         $collection->add_database_table(
-            'quizaccess_oql_quizsettings',
+            'quizaccess_oqylyq_settings',
             [
                 'usermodified' => 'privacy:metadata:quizaccess_oql_quizsettings:usermodified',
                 'timecreated' => 'privacy:metadata:quizaccess_oql_quizsettings:timecreated',
@@ -44,9 +65,9 @@ class provider implements
             'privacy:metadata:quizaccess_oql_quizsettings'
         );
 
-        // quizaccess_oql_quizurls - stores generated URLs per user
+        // quizaccess_oqylyq_urls - stores generated URLs per user
         $collection->add_database_table(
-            'quizaccess_oql_quizurls',
+            'quizaccess_oqylyq_urls',
             [
                 'userid' => 'privacy:metadata:quizaccess_oql_quizurls:userid',
                 'usermodified' => 'privacy:metadata:quizaccess_oql_quizurls:usermodified',
@@ -89,7 +110,7 @@ class provider implements
             SELECT ctx.id
               FROM {context} ctx
               JOIN {course_modules} cm ON cm.id = ctx.instanceid AND ctx.contextlevel = :contextlevel1
-              JOIN {quizaccess_oql_quizsettings} qs ON qs.cmid = cm.id
+              JOIN {quizaccess_oqylyq_settings} qs ON qs.cmid = cm.id
              WHERE qs.usermodified = :userid1
         ";
         $contextlist->add_from_sql($sql, [
@@ -102,7 +123,7 @@ class provider implements
             SELECT ctx.id
               FROM {context} ctx
               JOIN {course_modules} cm ON cm.id = ctx.instanceid AND ctx.contextlevel = :contextlevel2
-              JOIN {quizaccess_oql_quizurls} qu ON qu.cmid = cm.id
+              JOIN {quizaccess_oqylyq_urls} qu ON qu.cmid = cm.id
              WHERE qu.userid = :userid2 OR qu.usermodified = :userid3
         ";
         $contextlist->add_from_sql($sql2, [
@@ -133,7 +154,7 @@ class provider implements
 
         // Export quiz settings where user was the modifier.
         $sql = "SELECT qs.*
-                  FROM {quizaccess_oql_quizsettings} qs
+                  FROM {quizaccess_oqylyq_settings} qs
                   JOIN {course_modules} cm ON cm.id = qs.cmid
                   JOIN {context} ctx ON ctx.instanceid = cm.id AND ctx.contextlevel = :contextlevel1
                  WHERE ctx.id {$contextsql}
@@ -163,7 +184,7 @@ class provider implements
 
         // Export quiz URLs for this user.
         $sql = "SELECT qu.*
-                  FROM {quizaccess_oql_quizurls} qu
+                  FROM {quizaccess_oqylyq_urls} qu
                   JOIN {course_modules} cm ON cm.id = qu.cmid
                   JOIN {context} ctx ON ctx.instanceid = cm.id AND ctx.contextlevel = :contextlevel2
                  WHERE ctx.id {$contextsql}
@@ -215,19 +236,19 @@ class provider implements
             $cmid = $context->instanceid;
 
             // Delete quiz settings modified by this user.
-            $DB->delete_records('quizaccess_oql_quizsettings', [
+            $DB->delete_records('quizaccess_oqylyq_settings', [
                 'cmid' => $cmid,
                 'usermodified' => $userid
             ]);
 
             // Delete quiz URLs for this user.
-            $DB->delete_records('quizaccess_oql_quizurls', [
+            $DB->delete_records('quizaccess_oqylyq_urls', [
                 'cmid' => $cmid,
                 'userid' => $userid
             ]);
 
             // Also delete URLs modified by this user.
-            $DB->delete_records('quizaccess_oql_quizurls', [
+            $DB->delete_records('quizaccess_oqylyq_urls', [
                 'cmid' => $cmid,
                 'usermodified' => $userid
             ]);
@@ -248,8 +269,8 @@ class provider implements
 
         $cmid = $context->instanceid;
 
-        $DB->delete_records('quizaccess_oql_quizsettings', ['cmid' => $cmid]);
-        $DB->delete_records('quizaccess_oql_quizurls', ['cmid' => $cmid]);
+        $DB->delete_records('quizaccess_oqylyq_settings', ['cmid' => $cmid]);
+        $DB->delete_records('quizaccess_oqylyq_urls', ['cmid' => $cmid]);
     }
 
     /**
@@ -268,19 +289,19 @@ class provider implements
 
         // Users who modified quiz settings.
         $sql = "SELECT usermodified
-                  FROM {quizaccess_oql_quizsettings}
+                  FROM {quizaccess_oqylyq_settings}
                  WHERE cmid = :cmid";
         $userlist->add_from_sql('usermodified', $sql, ['cmid' => $cmid]);
 
         // Users who own quiz URLs.
         $sql = "SELECT userid
-                  FROM {quizaccess_oql_quizurls}
+                  FROM {quizaccess_oqylyq_urls}
                  WHERE cmid = :cmid";
         $userlist->add_from_sql('userid', $sql, ['cmid' => $cmid]);
 
         // Users who modified quiz URLs.
         $sql = "SELECT usermodified
-                  FROM {quizaccess_oql_quizurls}
+                  FROM {quizaccess_oqylyq_urls}
                  WHERE cmid = :cmid";
         $userlist->add_from_sql('usermodified', $sql, ['cmid' => $cmid]);
     }
@@ -311,18 +332,18 @@ class provider implements
         // Delete quiz settings.
         $select = "cmid = :cmid AND usermodified {$usersql}";
         $params = ['cmid' => $cmid] + $userparams;
-        $DB->delete_records_select('quizaccess_oql_quizsettings', $select, $params);
+        $DB->delete_records_select('quizaccess_oqylyq_settings', $select, $params);
 
         // Delete quiz URLs (both userid and usermodified).
         // We need to use OR condition, so we need separate SQL for each field.
         $select = "cmid = :cmid AND userid {$usersql}";
         $params = ['cmid' => $cmid] + $userparams;
-        $DB->delete_records_select('quizaccess_oql_quizurls', $select, $params);
+        $DB->delete_records_select('quizaccess_oqylyq_urls', $select, $params);
 
         // Also delete quiz URLs modified by these users.
         $select = "cmid = :cmid AND usermodified {$usersql}";
         $params = ['cmid' => $cmid] + $userparams;
-        $DB->delete_records_select('quizaccess_oql_quizurls', $select, $params);
+        $DB->delete_records_select('quizaccess_oqylyq_urls', $select, $params);
     }
 }
 
